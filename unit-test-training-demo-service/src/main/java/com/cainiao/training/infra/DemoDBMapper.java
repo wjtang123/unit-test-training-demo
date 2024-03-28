@@ -18,5 +18,6 @@ public class DemoDBMapper {
 
     public void deleteData(String sql) {
         // delete
+        System.out.println("data deleted success");
     }
 }

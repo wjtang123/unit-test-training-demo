@@ -2,20 +2,18 @@ package com.cainiao.training.service;
 
 import com.cainiao.training.infra.DemoDBMapper;
 import com.cainiao.training.infra.DemoTairClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 
 @Component
 public class DemoService {
-
-    @Resource
+    @Autowired
     DemoTairClient tairClient;
-
-    @Resource
+    @Autowired
     DemoDBMapper dbMapper;
 
     public String getResult(String request) throws IOException {
@@ -24,7 +22,6 @@ public class DemoService {
         if (cacheDate == null) {
             throw new IOException("Client Timeout");
         }
-
         if (!StringUtils.isEmpty(cacheDate)) {
             return cacheDate;
         } else {
@@ -32,8 +29,6 @@ public class DemoService {
         }
     }
 
-
-    //Advanced
     public List<String> getResults(List<String> requests) {
         return tairClient.batchGet(requests, () -> {
             List<String> dbResult = dbMapper.queryData(requests);
@@ -49,11 +44,8 @@ public class DemoService {
         if (StringUtils.isEmpty(key)) {
             return;
         }
-
         String sql = generateSQL(key);
-
-
-
+        System.out.println(sql);
         dbMapper.deleteData(sql);
     }
 

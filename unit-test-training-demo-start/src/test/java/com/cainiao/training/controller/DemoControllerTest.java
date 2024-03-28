@@ -34,7 +34,13 @@ public class DemoControllerTest {
     @Test
     //TODO 如何测试 Exception
     public void testExecution_throwsException_whenServiceThrowsException() throws Exception {
+        when(mockDemoService.getResult(anyString())).thenThrow(new IOException("ex_message"));
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> demoController.execute("argument"))
+                .withCauseExactlyInstanceOf(IOException.class)
+                .withMessageContaining("ex_message");
 
+        verify(mockDemoService).getResult(anyString());
+        verifyNoMoreInteractions(mockDemoService);
     }
 }
 

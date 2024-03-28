@@ -3,6 +3,11 @@ package com.cainiao.training.util;
 public class DemoLandlordClient {
 
     public static String getTenantId() {
-        throw new RuntimeException();
+        return "tenantId";
+    }
+
+    public static String getSecondTenantId(String arg) {
+//        throw new RuntimeException();
+        return "secondTenantId";
     }
 }

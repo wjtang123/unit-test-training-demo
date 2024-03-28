@@ -1,5 +1,7 @@
 package com.cainiao.training.service;
 
+import com.alibaba.fastjson.JSON;
+import com.cainiao.training.dto.DemoDTO;
 import com.cainiao.training.infra.DemoDBMapper;
 import com.cainiao.training.infra.DemoTairClient;
 import com.cainiao.training.service.DemoService;
@@ -24,7 +26,12 @@ public class DemoServiceTest {
     @Test
     //TODO 稍复杂 Service/Controller 层
     public void testGetResult_succeed_getFromCache() throws Exception {
-
+        String demoDTOJson = "{\"name\":\"testUser\",\"password\":\"fjalj12348>*\"}";
+        DemoDTO demoDTO = JSON.parseObject(demoDTOJson, DemoDTO.class);
+        System.out.println(demoDTO.getName());
+        System.out.println(demoDTO.getPassword());
+        Assert.assertEquals("用户名：", demoDTO.getName(), "testUser");
+        Assert.assertEquals("密码：", demoDTO.getPassword(), "fjalj12348>*");
     }
 
     @Test

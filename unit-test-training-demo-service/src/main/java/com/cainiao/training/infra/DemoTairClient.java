@@ -1,5 +1,6 @@
 package com.cainiao.training.infra;
 
+import com.cainiao.training.dto.DemoDTO;
 import com.cainiao.training.util.DemoLandlordClient;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -18,9 +19,7 @@ public class DemoTairClient {
 
 
     public String getCache(String key) {
-
         String tenantId = DemoLandlordClient.getTenantId();
-
         return String.format("%s %s", key, tenantId);
     }
 
@@ -39,11 +38,24 @@ public class DemoTairClient {
         } else {
             return cacheList;
         }
+    }
 
-
+    public List<String> batchGet(List<String> keys) {
+        List<String> cacheList = doBatchGet(keys);
+        return cacheList;
     }
 
     private List<String> doBatchGet(List<String> keys) {
         return new ArrayList<>(keys);
+    }
+
+    public DemoDTO constructDemoDTO () {
+        return new DemoDTO();
+    }
+
+    private DemoDTO demoDTO;
+
+    public String getFinalMethod() {
+        return demoDTO.getFinalValue();
     }
 }
