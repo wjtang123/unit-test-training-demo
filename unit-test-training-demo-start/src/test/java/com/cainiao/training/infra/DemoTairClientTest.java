@@ -29,7 +29,6 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 @PrepareForTest({DemoLandlordClient.class, DemoTairClient.class, DemoDTO.class}) // 告诉PowerMock哪些类需要字节码级别操作
 public class DemoTairClientTest {
 
-
     @Mock
     DemoLandlordClient demoLandlordClient;
 
